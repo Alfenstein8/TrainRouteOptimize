@@ -1,0 +1,8 @@
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: Empty
+AllowShortEnumsOnASingleLine: true
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+BreakStringLiterals: false
+ColumnLimit: 100
+AllowShortCaseLabelsOnASingleLine: false
