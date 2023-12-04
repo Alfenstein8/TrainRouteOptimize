@@ -26,8 +26,6 @@ FILE* load_local_file(char* file_path);
 int** load_od_table(int** interaction_table);
 Rail* load_rails(const char* file_path, char** station_names,
                  int station_amount);
-int str_exists(char* str, char** strs, int size);
-
 int main(void) {
   SimData data;
   char* file_path; /*The file path that the user provides*/
@@ -81,5 +79,3 @@ Rail* load_rails(const char* file_path, char** station_names,
   fclose(file);
   return rails;
 }
-
-int str_exists(char* str, char** strs, int size) { return 1; }
