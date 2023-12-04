@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct {
@@ -30,53 +31,53 @@ int str_exists(char* str, char** strs, int size);
 int main(void) {
   SimData data;
   char* file_path; /*The file path that the user provides*/
-  char** stations;
+  char* stations[10] = {"København H", "Odense St.",  "Fredericia St.",
+                        "Vejle St.",   "Horsens St.", "Skanderborg St.",
+                        "Aahus St.",   "Randers St.", "Hobro St.",
+                        "Aalborg St."};
   load_rails("rails.csv", stations, 10);
   return 0;
 }
 
 Rail* load_rails(const char* file_path, char** station_names,
                  int station_amount) {
-  Rail rails[100][100];
+  Rail* rails = (Rail*)malloc(sizeof(Rail) * station_amount);
   FILE* file;
   file = fopen(file_path, "r");
   if (file == NULL) {
     printf("Invalid file path");
   }
 
-  char line[1000];
-  int destinations[100];
-  int origins[100];
+  char read_line[500];
+  char destinations[100][50];
+  char origin[50];
 
-  printf("%s", line);
   int i = 0, j = 0;
-  int d = 0, o = 0;
 
-  while (fgets(line, sizeof(line), file)) {
+  while (fgets(read_line, sizeof(read_line), file)) {
     char* token;
-    token = strtok(line, ",");
-    while (token != NULL) {
-      if (!i && !j) {
-        continue;
+    char* line = strdup(read_line);
+
+    j = 0;
+    while ((token = strsep(&line, ","))) {
+      if (i == 0) {
+        int index = strcspn(token, "\n"); // Remove trailing \n if any found 
+        token[index] = '\0';
+        strcpy(destinations[j], token);
+      } else if (j == 0) {
+        strcpy(origin, token);
+      } else {
+        for (int o = 0; o < station_amount; ++o) {
+          if (!strcmp(origin, station_names[o]) &&
+              !strcmp(destinations[j], station_names[o + 1])) {
+            sscanf(token, " %d/%d ", &rails[o].length, &rails[o].top_speed);
+          }
+        }
       }
-      if (i == 0 && str_exists(token, station_names, station_amount)) {
-        sscanf(token, "%d", &destinations[d]);
-        ++d;
-        continue;
-      }
-      if (j == 0 && str_exists(token, station_names, station_amount)) {
-        sscanf(token, "%d", &origins[o]);
-        ++o;
-        continue;
-      }
-      sscanf(token, "%d/%d", &rails[i][j].length, &rails[i][j].top_speed);
-      printf("length: %d/ speed: %d\n ", rails[i][j].length, rails[i][j].top_speed);
-      token = strtok(NULL, ",");
       ++j;
     }
     ++i;
   }
-  printf("\n\n %d", rails[0][1].length);
   fclose(file);
   return rails;
 }
