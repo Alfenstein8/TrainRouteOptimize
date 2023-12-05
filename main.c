@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "rails/rails.h"
+#include "remove_stations/remove_stations.h"
 
 typedef struct {
   int x, y;
@@ -31,6 +32,21 @@ int main(void) {
                         "Aahus St.",   "Randers St.", "Hobro St.",
                         "Aalborg St."};
   Rail* rails = load_rails("rails.csv", stations, 10);
+
+
+
+struct TrainRoute train_route[] = {
+        {"Station1", 50},
+        {"Station2", 30},
+        {"Station3", 70},
+        // ... (indsæt flere stationer)
+    };
+
+    int num_stations = sizeof(train_route) / sizeof(train_route[0]);
+    int removal_percentage = 30;
+
+    remove_low_interaction_stations(train_route, num_stations, removal_percentage);
+
   return 0;
 }
 

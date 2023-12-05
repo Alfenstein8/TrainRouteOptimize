@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "remove_stations.h"
 
-struct TrainRoute {
-    char station_name[50];
-    int interaction_level;
-};
 
  //sammenlignignsfunktion der bruger qsort til at sortere stationerne alt efter deres interaktionsniveauer
 int compare_stations(const void *a, const void *b) {
@@ -44,18 +41,5 @@ void remove_low_interaction_stations(struct TrainRoute *route, int num_stations,
     }
 }
 
-int main() {
-    struct TrainRoute train_route[] = {
-        {"Station1", 50},
-        {"Station2", 30},
-        {"Station3", 70},
-        // ... (indsæt flere stationer)
-    };
 
-    int num_stations = sizeof(train_route) / sizeof(train_route[0]);
-    int removal_percentage = 30;
 
-    remove_low_interaction_stations(train_route, num_stations, removal_percentage);
-
-    return 0; 
-}
