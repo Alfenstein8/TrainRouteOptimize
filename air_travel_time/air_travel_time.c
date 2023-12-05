@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "air_travel_time.h"
+
+#include "../sim_file/sim_file.h"
+
 
 int main(void){
 
@@ -20,7 +22,7 @@ return 0;
 } */
 // Function to get the total air travel time
 }
-int get_total_air_travel_time(sim_file sim_data, int travel_time_origin_destination){ 
+int get_total_air_travel_time(SimFile sim_data, int travel_time_origin_destination){ 
 
 // Calculates the
 int air_route_travel_time;

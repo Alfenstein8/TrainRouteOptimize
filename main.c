@@ -2,32 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "sim_file/sim_file.h"
+#include "air_travel_time/air_travel_time.h"
 #include "rails/rails.h"
 #include "remove_stations/remove_stations.h"
-#include "air_travel_time/air_travel_time.h"
-
-
-typedef struct {
-  int x, y;
-} pos;
-
-typedef struct {
-  pos origin, destination;
-  pos start_airport, end_airport;
-  int flight_time, airport_prep_time;
-  int station_removal_percentage;
-  int depart_offset;
-  int turnover_time
-  int acceleration;
-  int hst_speed;
-} SimData;
 
 /*Functions*/
 FILE* load_local_file(char* file_path);
 int** load_od_table(int** interaction_table);
 
 int main(void) {
-  SimData data;
+  SimFile sim_file_data;
   char* file_path; /*The file path that the user provides*/
   char* stations[10] = {"København H", "Odense St.",  "Fredericia St.",
                         "Vejle St.",   "Horsens St.", "Skanderborg St.",
@@ -46,8 +31,12 @@ struct TrainRoute train_route[] = {
     int removal_percentage = 30;
 
     remove_low_interaction_stations(train_route, num_stations, removal_percentage);
-  int air = get_total_air_travel_time(SimFile , int travel_time_origin_destination);
+
+    int travel_time_origin_destination = 40;
+    sim_file_data.airport_prep_time_min = 60;
+    sim_file_data.flight_time_min = 70;
+
+    int air = get_total_air_travel_time(sim_file_data , travel_time_origin_destination);
 
   return 0;
 }
-
