@@ -1,4 +1,5 @@
 #include "rails.h"
+#include "../tools/tools.h"
 
 #include <stdio.h>
 #include <stdlib.h>
