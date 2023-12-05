@@ -36,7 +36,7 @@ struct TrainRoute train_route[] = {
     sim_file_data.airport_prep_time_min = 60;
     sim_file_data.flight_time_min = 70;
 
-    int air = get_total_air_travel_time(sim_file_data , travel_time_origin_destination);
+    int air = get_total_air_travel_time(sim_file_data, travel_time_origin_destination);
 
   return 0;
 }
