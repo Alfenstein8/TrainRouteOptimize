@@ -4,6 +4,8 @@
 
 #include "rails/rails.h"
 #include "remove_stations/remove_stations.h"
+#include "air_travel_time/air_travel_time.h"
+
 
 typedef struct {
   int x, y;
@@ -15,7 +17,7 @@ typedef struct {
   int flight_time, airport_prep_time;
   int station_removal_percentage;
   int depart_offset;
-  int turnover_time;
+  int turnover_time
   int acceleration;
   int hst_speed;
 } SimData;
@@ -33,8 +35,6 @@ int main(void) {
                         "Aalborg St."};
   Rail* rails = load_rails("rails.csv", stations, 10);
 
-
-
 struct TrainRoute train_route[] = {
         {"Station1", 50},
         {"Station2", 30},
@@ -46,6 +46,7 @@ struct TrainRoute train_route[] = {
     int removal_percentage = 30;
 
     remove_low_interaction_stations(train_route, num_stations, removal_percentage);
+  int air = get_total_air_travel_time(SimFile , int travel_time_origin_destination);
 
   return 0;
 }
