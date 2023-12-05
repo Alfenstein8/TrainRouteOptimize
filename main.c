@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "rails/rails.h"
 
 typedef struct {
   int x, y;
@@ -15,14 +19,18 @@ typedef struct {
   int hst_speed;
 } SimData;
 
-
 /*Functions*/
-FILE *load_local_file(char* file_path);
+FILE* load_local_file(char* file_path);
 int** load_od_table(int** interaction_table);
 
 int main(void) {
   SimData data;
   char* file_path; /*The file path that the user provides*/
-
+  char* stations[10] = {"København H", "Odense St.",  "Fredericia St.",
+                        "Vejle St.",   "Horsens St.", "Skanderborg St.",
+                        "Aahus St.",   "Randers St.", "Hobro St.",
+                        "Aalborg St."};
+  Rail* rails = load_rails("rails.csv", stations, 10);
   return 0;
 }
+
