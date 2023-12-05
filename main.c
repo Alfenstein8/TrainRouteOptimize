@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "rails/rails.h"
+#include "air_travel_time/air_travel_time.h"
 
 typedef struct {
   int x, y;
@@ -14,7 +15,7 @@ typedef struct {
   int flight_time, airport_prep_time;
   int station_removal_percentage;
   int depart_offset;
-  int turnover_time;
+  int turnover_time
   int acceleration;
   int hst_speed;
 } SimData;
@@ -31,6 +32,8 @@ int main(void) {
                         "Aahus St.",   "Randers St.", "Hobro St.",
                         "Aalborg St."};
   Rail* rails = load_rails("rails.csv", stations, 10);
+  int air = get_total_air_travel_time(SimFile , int travel_time_origin_destination);
+
   return 0;
 }
 
