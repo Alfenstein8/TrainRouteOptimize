@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include "rails.h"
+#include "../rails/rails.h"
 
 struct LineSegment {
     double speed; //  km/min
