@@ -1,17 +1,19 @@
-#ifndef sim_file
-#define sim_file
-typedef struct {
-  int x, y;
-} pos;
+#ifndef SIM_FILE
+#define SIM_FILE
+#define MAX_INPUT_LENGTH 50
 
 typedef struct {
-  pos origin, destination;
-  pos start_airport, end_airport;
-  int flight_time_min, airport_prep_time_min;
+  char origin[MAX_INPUT_LENGTH];
+  char destination[MAX_INPUT_LENGTH];
+  char start_airport[MAX_INPUT_LENGTH];
+  char end_airport[MAX_INPUT_LENGTH];
+  int flight_time_min;
+  int airport_prep_time_min;
+  int station_prep_time_min;
   int station_removal_percentage;
-  int depart_offset;
   int turnover_time;
-  double acceleration;
-  int hst_speed;
+  int hst_top_speed_kmt;
+  int acceleration;
 } SimFile;
+
 #endif

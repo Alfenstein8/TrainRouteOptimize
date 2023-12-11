@@ -2,37 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_INPUT_LENGTH 50
-
-typedef struct {
-  char origin[MAX_INPUT_LENGTH];
-  char destination[MAX_INPUT_LENGTH];
-  char start_airport[MAX_INPUT_LENGTH];
-  char end_airport[MAX_INPUT_LENGTH];
-  int flight_time_min;
-  int airport_prep_time_min;
-  int station_prep_time_min;
-  int station_removal_percentage;
-  int turnover_time;
-  int hst_top_speed_kmt;
-  int acceleration;
-} SimFile;
-
-// function to load file
-int load_local_file(SimFile *sim_file);
-
-int main(void) {
-
-
-  SimFile sim_file;
-
-  load_local_file(&sim_file);
-  printf("%s\n%s\n%s\n%s\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n", sim_file.origin, sim_file.destination, 
-  sim_file.start_airport, sim_file.end_airport, sim_file.flight_time_min, sim_file.airport_prep_time_min, 
-  sim_file.station_prep_time_min, sim_file.station_removal_percentage, sim_file.turnover_time, 
-  sim_file.hst_top_speed_kmt, sim_file.acceleration);
-  return 0;
-}
+#include "../sim_file/sim_file.h"
+#include "fileput.h"
 
 int load_local_file(SimFile *sim_file) {
   FILE *fp;
