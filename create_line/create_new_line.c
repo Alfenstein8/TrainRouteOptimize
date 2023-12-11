@@ -18,7 +18,7 @@ typedef struct LineSegment LineSegment;
     double time_at_top_speed = distance_at_top_speed / top_speed;
     
 
-    segment.speed = top_speed; 
+    segment.speed = top_speed/60;  // convert from km/t to km/m
     segment.total_time = 2*time_not_at_top_speed + time_at_top_speed + turnover_time; 
 
     return segment;
@@ -28,9 +28,13 @@ typedef struct LineSegment LineSegment;
 
      LineSegment* new_line = (LineSegment *) malloc (num_stations * sizeof(LineSegment));
 
+     HST_acceleration *= 3.6; // convert from meter per second squared to kilometers per minute squated
+
     for (int i = 0; i < num_stations; ++i) {
-        int top_speed = new_rails[i].top_speed;
+        int top_speed = (new_rails[i].top_speed)/60; // convert from km/t to km/m
         int length = new_rails[i].length;
+
+        
 
         new_line[i] = create_line_segment(top_speed, HST_acceleration, length, turnover_time);
     }
