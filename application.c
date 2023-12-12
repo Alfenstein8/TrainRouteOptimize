@@ -8,11 +8,11 @@
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
 
-void run(void) {
+void run(const char *filename) {
   SimFile sim_file_data;
   char *file_path; /*The file path that the user provides*/
 
-  load_local_file(&sim_file_data);
+  load_local_file(&sim_file_data, filename);
   printf("%s\n%s\n%s\n%s\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n", sim_file_data.origin,
          sim_file_data.destination, sim_file_data.start_airport, sim_file_data.end_airport,
          sim_file_data.flight_time_min, sim_file_data.airport_prep_time_min,
