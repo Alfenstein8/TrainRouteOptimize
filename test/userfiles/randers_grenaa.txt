@@ -1,11 +1,11 @@
-Origin: Copenhagen
-Destination: Aalborg
-Start Airport: Copenhagen
-End Airport: Aalborg
-Flight Time In Minuets: 60
-Airport Preperaton Time: 60
-Station Preperation Time: 0
-Station Percent: 20
-Station Turnover Time: 10
-High-Speed-Train (HST) Top Speed: 250
-High-Speed-Train (HST) Acceleration: 40
+Origin: Randers St.
+Destination: Grenaa vej nummer 4
+Start Airport: Mums
+End Airport: Grenaa lufthavn
+Flight Time In Minuets: 70
+Airport Preperaton Time: 30
+Station Preperation Time: 10
+Station Percent: 1
+Station Turnover Time: 5
+High-Speed-Train (HST) Top Speed: 180
+High-Speed-Train (HST) Acceleration: 1000
