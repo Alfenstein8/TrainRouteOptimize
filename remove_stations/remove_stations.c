@@ -68,15 +68,7 @@ int remove_low_interaction_stations(int *route, int num_stations, int removal_pe
   for (int i = num_to_remove + 1; i < num_stations; i++) {
     new_route[i - num_to_remove] = sort_route[i].station_nr;
   }
-
-  printf("Removing %d stations with the lowest interaction levels:\n", num_to_remove);
-  for (int i = 1; i <= num_to_remove; i++) {
-    printf("station number: %d\n", sort_route[i].station_nr);
-  }
-  printf("\nUpdated Train Route after removal:\n");
-  for (int i = 0; i < num_stations - num_to_remove; i++) {
-    printf("station number: %d\n", new_route[i]);
-  }
+  
 
   return num_stations - num_to_remove;
 }
