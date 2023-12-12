@@ -9,22 +9,10 @@ struct LineSegment {
 };
 typedef struct LineSegment LineSegment;
 
-     LineSegment create_line_segment(int top_speed, double acceleration, double distance, int turnover_time) {
-     LineSegment segment;
+LineSegment create_line_segment(int top_speed, double acceleration, double distance, int turnover_time);
 
-    double time_not_at_top_speed = top_speed / acceleration;
-    double distance_not_at_top_speed = 0.5 * acceleration * pow(time_not_at_top_speed, 2);
-    double distance_at_top_speed = distance - 2*distance_not_at_top_speed;
-    double time_at_top_speed = distance_at_top_speed / top_speed;
-    
 
-    segment.speed = top_speed/60;  // convert from km/t to km/m
-    segment.total_time = 2*time_not_at_top_speed + time_at_top_speed + turnover_time; 
-
-    return segment;
-}
-
- LineSegment* create_new_line(double HST_acceleration, Rail new_rails[], int num_stations,int turnover_time) {
+LineSegment* create_new_line(double HST_acceleration, Rail new_rails[], int num_stations,int turnover_time) {
 
      LineSegment* new_line = (LineSegment *) malloc (num_stations * sizeof(LineSegment));
 
@@ -40,4 +28,21 @@ typedef struct LineSegment LineSegment;
     }
 
     return new_line;
+}
+
+
+
+LineSegment create_line_segment(int top_speed, double acceleration, double distance, int turnover_time) {
+   LineSegment segment;
+
+    double time_not_at_top_speed = top_speed / acceleration;
+    double distance_not_at_top_speed = 0.5 * acceleration * pow(time_not_at_top_speed, 2);
+    double distance_at_top_speed = distance - 2*distance_not_at_top_speed;
+    double time_at_top_speed = distance_at_top_speed / top_speed;
+    
+
+    segment.speed = top_speed/60;  // convert from km/t to km/m
+    segment.total_time = 2*time_not_at_top_speed + time_at_top_speed + turnover_time; 
+
+    return segment;
 }
