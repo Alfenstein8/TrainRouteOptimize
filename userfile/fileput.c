@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../sim_file/sim_file.h"
+#include "fileput.h"
+
 int load_local_file(SimFile *sim_file, const char *filename) {
   FILE *fp = fopen(filename, "r");
   if (fp == NULL) {
