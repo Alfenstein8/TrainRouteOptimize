@@ -1,0 +1,1 @@
+int rejseplanen_fake_api (char *origin, char *destination);
