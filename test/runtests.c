@@ -7,7 +7,6 @@
 #include "test_calc_interaction_levels.h"
 #include "test_load_rails.h"
 
-
 void run_all_tests();
 
 int main(void){
@@ -25,6 +24,7 @@ void run_all_tests(){
   CuSuiteAddSuite(suite, (CuSuite *)air_travel_time_get_suite());
   CuSuiteAddSuite(suite, (CuSuite *)calc_interaction_get_suite());
   CuSuiteAddSuite(suite, (CuSuite *)load_rails_get_suite());
+
 
 
   CuSuiteRun(suite);
