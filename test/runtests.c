@@ -4,6 +4,7 @@
 #include "test_userfile.h"
 #include "test_remove_stations.h"
 #include "test_air_travel_time.h"
+#include "test_calc_interaction_levels.h"
 
 
 void run_all_tests();
@@ -21,6 +22,8 @@ void run_all_tests(){
   CuSuiteAddSuite(suite, (CuSuite *)userfile_get_suite());
   CuSuiteAddSuite(suite, (CuSuite *)remove_stations_get_suite());
   CuSuiteAddSuite(suite, (CuSuite *)air_travel_time_get_suite());
+  CuSuiteAddSuite(suite, (CuSuite *)calc_interaction_get_suite());
+
 
   CuSuiteRun(suite);
   CuSuiteSummary(suite, output);
