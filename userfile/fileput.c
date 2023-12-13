@@ -15,7 +15,7 @@ int load_local_file(SimFile *sim_file, const char *filename) {
   fscanf(fp, "Destination: %49[^\n]\n", sim_file->destination);
   fscanf(fp, "Start Airport: %49[^\n]\n", sim_file->start_airport);
   fscanf(fp, "End Airport: %49[^\n]\n", sim_file->end_airport);
-  fscanf(fp, "Flight Time In Minuets: %d [^\n]\n", &sim_file->flight_time_min);
+  fscanf(fp, "Flight Time In Minutes: %d [^\n]\n", &sim_file->flight_time_min);
   fscanf(fp, "Airport Preperaton Time: %d [^\n]\n", &sim_file->airport_prep_time_min);
   fscanf(fp, "Station Preperation Time: %d [^\n]\n", &sim_file->station_prep_time_min);
   fscanf(fp, "Station Percent: %d [^\n]\n", &sim_file->station_removal_percentage);
