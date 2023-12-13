@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "air_travel_time/air_travel_time.h"
+#include "calc_all_interaction_levels/calc_interaction.h"
 #include "rails/rails.h"
 #include "remove_stations/remove_stations.h"
 #include "sim_file/sim_file.h"
@@ -24,7 +25,22 @@ void run(const char *filename) {
                         "Hobro St.",   "Aalborg St."};
   Rail *rails = load_rails("rails.csv", stations, 10);
 
-  int train_route[] = {50, 30, 70, 45, 15, 745, 13};
+  /*Missing load_od_table()*/
+  int OD_table[10][10] = {
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
+  };
+
+
+  int *interaction_levels = calculate_all_interaction_levels(10, (int*)OD_table);
 
   int num_stations = 7;
   int removal_percentage = 100;
@@ -32,7 +48,7 @@ void run(const char *filename) {
   int new_route[num_stations];
   int new_size;
   new_size =
-      remove_low_interaction_stations(train_route, num_stations, removal_percentage, new_route);
+      remove_low_interaction_stations(interaction_levels, num_stations, removal_percentage, new_route);
 
   int travel_time_origin_destination = 40;
   sim_file_data.airport_prep_time_min = 60;
