@@ -24,7 +24,7 @@ user_field fields[FIELD_SIZE] = {{"Origin", STRING},
                                  {"High-Speed_train (HST) Top Speed", INT},
                                  {"High-Speed_train (HST) Acceleration", INT}};
 
-int main(void) {
+void run_file_gen(void) {
   char filename[100];
 
   printf("Name of new file: ");
@@ -53,5 +53,4 @@ int main(void) {
     }
   }
   fclose(fp);
-  return 0;
 }
