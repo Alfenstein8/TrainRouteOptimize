@@ -1,0 +1,11 @@
+Origin: Copenhagen
+Destination: Aalborg
+Start Airport: Copenhagen
+End Airport: Aalborg
+Flight Time In Minuets: 60
+Airport Preperaton Time: 60
+Station Preperation Time: 0
+Station Percent: 20
+Station Turnover Time: 10
+High-Speed-Train (HST) Top Speed: 250
+High-Speed-Train (HST) Acceleration: 40

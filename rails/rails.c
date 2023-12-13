@@ -5,10 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-Rail* load_rails(const char* file_path, char** station_names,
-                 int station_amount) {
-  Rail* rails = (Rail*)malloc(sizeof(Rail) * station_amount);
-  FILE* file;
+int is_in_string_arr(const char *string, char **arr, int arr_size);
+
+Rail *load_rails(const char *file_path, char **station_names, int station_amount) {
+  Rail *rails = (Rail *)malloc(sizeof(Rail) * station_amount);
+  FILE *file;
   file = fopen(file_path, "r");
   if (file == NULL) {
     printf("Invalid file path");
@@ -18,32 +19,44 @@ Rail* load_rails(const char* file_path, char** station_names,
   char destinations[100][50];
   char origin[50];
 
-  int i = 0, j = 0;
+  int row = 0, column = 0;
 
   while (fgets(read_line, sizeof(read_line), file)) {
-    char* token;
-    char* line = strdup(read_line);
+    char *token;                    // current cell value
+    char *line = strdup(read_line); // Create a pointer to a duplicate of the string
 
-    j = 0;
-    while ((token = strsep(&line, ","))) {
-      if (i == 0) {
-        int index = strcspn(token, "\n");  // Remove trailing \n if any found
+    column = 0;
+    while ((token = strsep(&line, ","))) { // Go to next cell
+      if (row == 0) {
+        int index = strcspn(token, "\n"); // Remove trailing \n if any are found
         token[index] = '\0';
-        strcpy(destinations[j], token);
-      } else if (j == 0) {
+        strcpy(destinations[column], token);
+      } else if (column == 0) {
+        if (!is_in_string_arr(token, station_names, station_amount)) {
+          break;
+        }
         strcpy(origin, token);
       } else {
-        for (int o = 0; o < station_amount; ++o) {
-          if (!strcmp(origin, station_names[o]) &&
-              !strcmp(destinations[j], station_names[o + 1])) {
-            sscanf(token, " %d/%d ", &rails[o].length, &rails[o].top_speed);
+        for (int i = 0; i < station_amount; ++i) {
+          if (!strcmp(origin, station_names[i]) &&
+              !strcmp(destinations[column], station_names[i + 1])) {
+            sscanf(token, " %d/%d ", &rails[i].length, &rails[i].top_speed);
           }
         }
       }
-      ++j;
+      ++column;
     }
-    ++i;
+    ++row;
   }
   fclose(file);
   return rails;
+}
+
+int is_in_string_arr(const char *string, char **arr, int arr_size) {
+  for (int i = 0; i < arr_size; ++i) {
+    if (!strcmp(string, arr[i])) {
+      return 1;
+    }
+  }
+  return 0;
 }
