@@ -1,6 +1,7 @@
 test_files := $(wildcard test/*.c)
+generator_files := $(wildcard userfile_generator/*.c)
 basefiles := $(wildcard *.c)
-files := $(basefiles) rails/rails.c remove_stations/remove_stations.c air_travel_time/air_travel_time.c tools/tools.c userfile/fileput.c calc_all_interaction_levels/calc_interaction.c
+files := $(basefiles) $(generator_files) rejseplan_fake_api/rejseplan_fake_api.c rails/rails.c remove_stations/remove_stations.c air_travel_time/air_travel_time.c tools/tools.c userfile/fileput.c calc_all_interaction_levels/calc_interaction.c
 train_optimize: $(files) 
 	gcc $(files)
 tests: $(files) $(test_files)

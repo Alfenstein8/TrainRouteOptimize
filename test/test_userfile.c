@@ -37,7 +37,7 @@ void test_local_file_RG(CuTest *tc) {
 
 void test_local_file_PF(CuTest *tc) {
   SimFile sim_file;
-  load_local_file(&sim_file, "test/userfiles/præstø_fanø.txt");
+  load_local_file(&sim_file, "test/userfiles/praestoe_fanoe.txt");
   CuAssertStrEquals(tc, "Præstø", sim_file.origin);
   CuAssertStrEquals(tc, "Fanø", sim_file.destination);
   CuAssertStrEquals(tc, "præstø lufthavn", sim_file.start_airport);

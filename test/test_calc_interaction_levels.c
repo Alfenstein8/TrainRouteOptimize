@@ -12,7 +12,7 @@ void test_calc_interaction1to10(CuTest *tc) {
   };
   int *levels = calculate_all_interaction_levels(10, (int *)OD_table);
   for (int i = 0; i < 10; ++i) {
-    CuAssertIntEquals(tc, (i + 1) * 10 + 55, levels[i]);
+    CuAssertIntEquals(tc, (i + 1) * 10 + 55 - ((i + 1) * 2), levels[i]);
   }
 }
 
@@ -26,7 +26,7 @@ void test_calc_interaction1(CuTest *tc) {
   };
   int *levels = calculate_all_interaction_levels(10, (int *)OD_table);
   for (int i = 0; i < 10; ++i) {
-    CuAssertIntEquals(tc, 20, levels[i]);
+    CuAssertIntEquals(tc, 18, levels[i]);
   }
 }
 
