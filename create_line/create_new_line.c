@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "../rails/rails.h"
-
+#include "create_new_line.h"
 
 double create_line_segment(int top_speed, double acceleration, double distance);
 
