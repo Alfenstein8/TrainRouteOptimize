@@ -7,20 +7,28 @@
 
 void remove_punctuation(char *p, char c);
 
-int **load_od_table(char **route, int **loaded_od_table){
+int **load_od_table(char **route, int **loaded_od_table, char filename[]){
+    int **loaded_od_table;
     char read_line[2850];
     int station_col_index[290];
     int row_index = 0;
     int j = 0;
     int e = 0;
 
-    FILE *f = fopen("OD_modified.csv", "r");
+    f = fopen(filename, "r");
     if (f == NULL){
         printf("Error in opening of file \n");
         exit(EXIT_FAILURE);
     }
 
     while (fgets(read_line, sizeof(read_line), f)){
+        loaded_od_table = (int **)malloc(289 * sizeof(int *));
+        int i;
+        for (i = 0; i < 289; i++) {
+            loaded_od_table[i] = (int *)malloc(289 * sizeof(int));
+        }
+
+
         char *station;
         char *line = strdup(read_line);
         int col_index = 0;
@@ -37,8 +45,6 @@ int **load_od_table(char **route, int **loaded_od_table){
                 }
                 n++;
                 }
-
-
                 if(strcmp(station, route[j]) == 0 && row_index != 0
                 && col_index == 0){
                     l = 1;
