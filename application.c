@@ -13,6 +13,7 @@ void run(const char *file_path) {
   SimFile sim_file_data;
 
   load_local_file(&sim_file_data, file_path);
+
   printf("%s\n%s\n%s\n%s\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n", sim_file_data.origin,
          sim_file_data.destination, sim_file_data.start_airport, sim_file_data.end_airport,
          sim_file_data.flight_time_min, sim_file_data.airport_prep_time_min,
