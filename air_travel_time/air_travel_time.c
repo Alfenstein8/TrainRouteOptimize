@@ -8,7 +8,7 @@ int get_total_air_travel_time(SimFile sim_data, int travel_time_origin_destinati
 /* Calculates the total air time taking into account air flight time, air preparation time and..
 *  travel time from origin to start airport & end airport to destination 
 */
-int air_route_travel_time;
+int air_route_travel_time = 0;
 
 air_route_travel_time += sim_data.flight_time_min;
 air_route_travel_time += sim_data.airport_prep_time_min;

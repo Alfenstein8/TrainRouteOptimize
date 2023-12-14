@@ -1,45 +1,75 @@
+#include "remove_stations.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "remove_stations.h"
+#include <string.h>
 
-
- //sammenlignignsfunktion der bruger qsort til at sortere stationerne alt efter deres interaktionsniveauer
-int compare_stations(const void *a, const void *b) {
-    return ((struct TrainRoute *)a)->interaction_level - ((struct TrainRoute *)b)->interaction_level;
+struct sort_item {
+  int station_nr;
+  int interaction_level;
+};
+/*Sammenligningsfunktion der bruger qsort til at sortere stationerne alt efter deres
+ interaktionsniveauer*/
+int compare_interaction_levels(const void *a, const void *b) {
+  struct sort_item *sa = (struct sort_item *)a;
+  struct sort_item *sb = (struct sort_item *)b;
+  if (sa->interaction_level < sb->interaction_level) {
+    return -1;
+  } else if (sa->interaction_level > sb->interaction_level) {
+    return 1;
+  }
+  return 0;
 }
 
-void remove_low_interaction_stations(struct TrainRoute *route, int num_stations, int removal_percentage) {
-    // Undgå at fjerne første og sidste station
-    if (num_stations <= 2) {
-        printf("Not enough stations to remove.\n");
-        return;
-    }
-
-
-    // Sorter stationerne undtagen første og sidste station?? ikke helt sikker her:P
-    qsort(route + 1, num_stations - 2, sizeof(struct TrainRoute), compare_stations);
-
-
-    // Beregn det ønskede antal stationer, der skal fjernes baseret på fjernelsesprocenten
-    int num_to_remove = (removal_percentage * (num_stations - 2)) / 100;
-    // Undgå at fjerne flere stationer end der er til rådighed (undtagen den første og den sidste)
-    num_to_remove = (num_to_remove >= num_stations - 2) ? num_stations - 2 : num_to_remove;
-
-    printf("Removing %d stations with the lowest interaction levels:\n", num_to_remove);
-    for (int i = 1; i <= num_to_remove; i++) {
-        printf("%s - Interaction Level: %d\n", route[i].station_name, route[i].interaction_level);
-    }
-
-    // Fjerner de laveste interaktionsstationer 
-    for (int i = 1; i <= num_to_remove; i++) {
-        route[i] = route[i + num_to_remove];
-    }
-
-    printf("\nUpdated Train Route after removal:\n");
-    for (int i = 0; i < num_stations - num_to_remove; i++) {
-        printf("%s - Interaction Level: %d\n", route[i].station_name, route[i].interaction_level);
-    }
+int compare_station_numbers(const void *a, const void *b) {
+  struct sort_item *sa = (struct sort_item *)a;
+  struct sort_item *sb = (struct sort_item *)b;
+  if (sa->station_nr < sb->station_nr) {
+    return -1;
+  } else if (sa->station_nr > sb->station_nr) {
+    return 1;
+  }
+  return 0;
 }
 
+int remove_low_interaction_stations(int *route, int num_stations, int removal_percentage,
+                                    int *new_route) {
+  if (num_stations <= 1) {
+    printf("Not enough stations to remove.\n");
+    return 0;
+  }
 
+  /*Make a temporary array which contains the station numbers, in order to keep track of the order*/
+  struct sort_item sort_route[num_stations];
+  for (int i = 0; i < num_stations; ++i) {
+    sort_route[i].interaction_level = route[i];
+    sort_route[i].station_nr = i;
+  }
+
+  /*Sort stations except for the first and last station, based on interaction_level*/
+  qsort(sort_route + 1, num_stations - 2, sizeof(struct sort_item), compare_interaction_levels);
+
+  for (int i = 0; i < num_stations; ++i) {
+    printf("nr: %d, inter: %d\n", sort_route[i].station_nr, sort_route[i].interaction_level);
+  }
+
+  /*Caps the removal_percentage at 100%*/
+  removal_percentage = removal_percentage > 100 ? 100 : removal_percentage;
+  /*Calculate amount of stations to be removed*/
+  int num_to_remove = (removal_percentage * (num_stations - 2)) / 100;
+
+  /*Sort back to original station order, based on sort_item station number*/
+  qsort(sort_route + 1 + num_to_remove, num_stations - 2 - num_to_remove, sizeof(struct sort_item),
+        compare_station_numbers);
+
+  /*Moves all stations except for removed stations to new array*/
+  int new_route_size = num_stations - num_to_remove;
+  new_route[0] = sort_route[0].station_nr;
+  new_route[new_route_size - 1] = sort_route[num_stations - 1].station_nr;
+  for (int i = num_to_remove + 1; i < num_stations; i++) {
+    new_route[i - num_to_remove] = sort_route[i].station_nr;
+  }
+  
+
+  return num_stations - num_to_remove;
+}
 
