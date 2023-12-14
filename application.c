@@ -8,6 +8,7 @@
 #include "remove_stations/remove_stations.h"
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
+#include "new_rails/new_rail.h"
 #include "rejseplan_fake_api/rejseplan_fake_api.h"
 
 void run(const char *file_path) {
@@ -50,7 +51,12 @@ void run(const char *file_path) {
   int hst_route_size = remove_low_interaction_stations(interaction_levels, num_of_stations,
                                                        removal_percentage, hst_route);
 
+  Rail *new_rails_hst = make_new_rails(rails, hst_route, hst_route_size);
+  free(rails);
+
   int travel_time_origin_destination = 40;
 
   int air = get_total_air_travel_time(sim_file_data, travel_time_origin_destination);
+
+  free(new_rails_hst);
 }
