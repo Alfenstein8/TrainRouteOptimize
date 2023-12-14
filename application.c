@@ -8,6 +8,7 @@
 #include "remove_stations/remove_stations.h"
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
+#include "rejseplan_fake_api/rejseplan_fake_api.h"
 
 void run(const char *file_path) {
   SimFile sim_file_data;
@@ -20,11 +21,11 @@ void run(const char *file_path) {
          sim_file_data.station_prep_time_min, sim_file_data.station_removal_percentage,
          sim_file_data.turnover_time, sim_file_data.hst_top_speed_kmt, sim_file_data.acceleration);
 
-  int num_of_stations = 10;
 
-  char *stations[] = {"København H", "Odense St.",      "Fredericia St.", "Vejle St.",
-                      "Horsens St.", "Skanderborg St.", "Aahus St.",      "Randers St.",
-                      "Hobro St.",   "Aalborg St."};
+  char *stations[10];
+  int num_of_stations = api_get_route("København", "Aalborg",stations); 
+                     
+                     
   Rail *rails = load_rails("rails.csv", stations, num_of_stations);
 
   /*Missing load_od_table()*/
