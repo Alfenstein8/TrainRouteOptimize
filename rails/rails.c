@@ -49,6 +49,8 @@ Rail *load_rails(const char *file_path, char **station_names, int station_amount
     ++row;
   }
   fclose(file);
+  rails[station_amount-1].length = 0;
+  rails[station_amount-1].top_speed = 0;
   return rails;
 }
 
