@@ -2,12 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "../rails/rails.h"
-
-struct LineSegment {
-    double speed; //  km/min
-    double total_time; // min
-};
-typedef struct LineSegment LineSegment;
+#include "create_new_line.h"
 
 LineSegment create_line_segment(int top_speed, double acceleration, double distance, int turnover_time);
 
@@ -21,8 +16,6 @@ LineSegment* create_new_line(double HST_acceleration, Rail new_rails[], int num_
     for (int i = 0; i < num_stations; ++i) {
         int top_speed = (new_rails[i].top_speed)/60; // convert from km/t to km/m
         int length = new_rails[i].length;
-
-        
 
         new_line[i] = create_line_segment(top_speed, HST_acceleration, length, turnover_time);
     }
