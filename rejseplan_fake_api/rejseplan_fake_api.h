@@ -1,1 +1,1 @@
-int rejseplanen_fake_api (char *origin, char *destination);
+int api_get_route(char *origin, char *destination, char *route[]);

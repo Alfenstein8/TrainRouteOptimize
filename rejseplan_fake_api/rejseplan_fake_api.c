@@ -1,7 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int rejseplanen_fake_api (char *origin, char *destination){
-
-    return 4 * 60 + 10;
+int api_get_route(char *origin, char *destination, char *route[]) {
+  route[0] = "København";
+  route[1] = "Odense St.";
+  route[2] = "Fredericia St.";
+  route[3] = "Vejle St.";
+  route[4] = "Horsens St.";
+  route[5] = "Skanderborg St.";
+  route[6] = "Aarhus St.";
+  route[7] = "Randers St.";
+  route[8] = "Hobro St.";
+  route[9] = "Aalborg St.";
+  return 10;
 }
