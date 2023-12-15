@@ -6,7 +6,7 @@
 int main(const int argc, char **argv) {
 
   if (argc <= 1) {
-    printf("No file entered");
+    printf("No file entered\n");
     return 0;
   }
   int found_gen = 0;
