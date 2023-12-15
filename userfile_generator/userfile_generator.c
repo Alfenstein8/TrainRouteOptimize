@@ -21,8 +21,8 @@ user_field fields[FIELD_SIZE] = {{"Origin", STRING},
                                  {"Station Preperation Time", INT},
                                  {"Station Percent", INT},
                                  {"Station Turnover Time", INT},
-                                 {"High-Speed_train (HST) Top Speed", INT},
-                                 {"High-Speed_train (HST) Acceleration", INT}};
+                                 {"High-Speed-Train (HST) Top Speed", INT},
+                                 {"High-Speed-Train (HST) Acceleration", INT}};
 
 void run_file_gen(void) {
   char filename[100];
