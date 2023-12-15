@@ -3,7 +3,7 @@ Destination: Aalborg
 Start Airport: Copenhagen
 End Airport: Aalborg
 Flight Time In Minutes: 60
-Airport Preperaton Time: 60
+Airport Preperation Time: 60
 Station Preperation Time: 0
 Station Percent: 20
 Station Turnover Time: 10
