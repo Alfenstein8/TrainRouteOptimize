@@ -10,6 +10,7 @@
 #include "userfile/fileput.h"
 #include "new_rails/new_rail.h"
 #include "rejseplan_fake_api/rejseplan_fake_api.h"
+#include "OD_table/load_od_table.h"
 
 void run(const char *file_path) {
   SimFile sim_file_data;
@@ -29,20 +30,10 @@ void run(const char *file_path) {
                      
   Rail *rails = load_rails("rails.csv", stations, num_of_stations);
 
-  /*Missing load_od_table()*/
-  int OD_table[10][10] = {
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-  };
+  int **OD_table;
 
+  int **p_od = load_od_table(stations, num_of_stations, "OD_modified.csv");
+  printf("'%d'", p_od[0][0]);
   int *interaction_levels = calculate_all_interaction_levels(num_of_stations, (int *)OD_table);
 
   int removal_percentage = 100;

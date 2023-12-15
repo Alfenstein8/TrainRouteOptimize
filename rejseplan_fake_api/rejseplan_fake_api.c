@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int api_get_route(char *origin, char *destination, char *route[]) {
-  route[0] = "København";
+  route[0] = "Koebenhavn";
   route[1] = "Odense St.";
   route[2] = "Fredericia St.";
   route[3] = "Vejle St.";

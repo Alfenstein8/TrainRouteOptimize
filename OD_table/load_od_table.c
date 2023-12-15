@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int **load_od_table(char **route, int route_length, char filename[]){
+int **load_od_table(char **route, int route_length, char *filename){
+  printf("Filename: %s", filename);
     int **loaded_od_table;
     loaded_od_table = (int **)malloc(route_length * sizeof(int *));
     int i;
