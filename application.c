@@ -11,6 +11,7 @@
 #include "remove_stations/remove_stations.h"
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
+#include "offset/offset.h"
 
 void run(const char *file_path) {
   SimFile sim_file_data;

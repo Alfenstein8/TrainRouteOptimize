@@ -1,7 +1,4 @@
-struct Line {
-    int num_segments;
-    struct Rail segments[9]; // max size will always be 9 in our example route
-};
+#include "../rails/rails.h"
 
-int calculate_departure_offset(struct Line *ICL_train_line, struct Line *HST_train_line);
+int calculate_departure_offset(Rail *new_rail, Rail *original_rail,double new_line[], double icl_line[], int HST_station_amount, int ICL_station_amount,int turnover_time);
 
