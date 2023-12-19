@@ -1,4 +1,4 @@
-Origin: Copenhagen
+Origin: København
 Destination: Aalborg
 Start Airport: Kastrup lufthavn
 End Airport: Aalborg lufthavn
