@@ -20,6 +20,7 @@ for(int i = 0; i < new_route_size - 1; i++){
         }
     /* Calculates the average top for this segment using weighted arithmetic */
     new_rails[i].top_speed = weighted_speed / new_rails[i].length;
+    new_rails[i].station_number = new_route[i];
     }
     return new_rails;
 }
