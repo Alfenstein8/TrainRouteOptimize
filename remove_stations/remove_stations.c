@@ -7,8 +7,8 @@ struct sort_item {
   int station_nr;
   int interaction_level;
 };
-/*Sammenligningsfunktion der bruger qsort til at sortere stationerne alt efter deres
- interaktionsniveauer*/
+
+/*Sort based on interaction levels*/
 int compare_interaction_levels(const void *a, const void *b) {
   struct sort_item *sa = (struct sort_item *)a;
   struct sort_item *sb = (struct sort_item *)b;
@@ -20,6 +20,7 @@ int compare_interaction_levels(const void *a, const void *b) {
   return 0;
 }
 
+/*Sort based on station number*/
 int compare_station_numbers(const void *a, const void *b) {
   struct sort_item *sa = (struct sort_item *)a;
   struct sort_item *sb = (struct sort_item *)b;
@@ -68,7 +69,6 @@ int remove_low_interaction_stations(int *route, int num_stations, int removal_pe
   for (int i = num_to_remove + 1; i < num_stations; i++) {
     new_route[i - num_to_remove] = sort_route[i].station_nr;
   }
-  
 
   return num_stations - num_to_remove;
 }
