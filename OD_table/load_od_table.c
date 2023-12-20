@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_ROW_CHAR_LENGTH 2850
+#define MAX_TO_STATIONS 290
+#define MAX_STATION_NAME_LENGTH 50
+
 int **load_od_table(char **route, int route_length, char filename[]) {
   int **loaded_od_table;
   loaded_od_table = (int **)malloc(route_length * sizeof(int *));
@@ -19,11 +23,10 @@ int **load_od_table(char **route, int route_length, char filename[]) {
     exit(EXIT_FAILURE);
   }
 
-  char read_line[2850];
-  int row_index_of_route_stations[290];
+  char read_line[MAX_ROW_CHAR_LENGTH];
   int row_index = 0, col_index = 0;
-  char to_stations[290][50];
-  char from_station[50];
+  char to_stations[MAX_TO_STATIONS][MAX_STATION_NAME_LENGTH];
+  char from_station[MAX_STATION_NAME_LENGTH];
 
   while (fgets(read_line, sizeof(read_line), f)) {
     char *station;
