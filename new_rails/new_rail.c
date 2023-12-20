@@ -11,7 +11,7 @@ Rail *make_new_rails(Rail *rails, int *new_route, int new_route_size) {
   /* Sorts the new route array one segment at a time */
   for (int i = 0; i < new_route_size - 1; i++) {
     new_rails[i].length = 0;   // km
-    double weighted_speed = 0; // km/h ??
+    double weighted_speed = 0; // km/h 
     /* Runs through each rail segment, compacting the lengths
      * from different segments into new combined lengths */
     for (int j = new_route[i]; j < new_route[i + 1]; j++) {
