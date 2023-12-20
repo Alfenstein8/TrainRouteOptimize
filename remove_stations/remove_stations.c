@@ -49,10 +49,6 @@ int remove_low_interaction_stations(int *route, int num_stations, int removal_pe
   /*Sort stations except for the first and last station, based on interaction_level*/
   qsort(sort_route + 1, num_stations - 2, sizeof(struct sort_item), compare_interaction_levels);
 
-  for (int i = 0; i < num_stations; ++i) {
-    printf("nr: %d, inter: %d\n", sort_route[i].station_nr, sort_route[i].interaction_level);
-  }
-
   /*Caps the removal_percentage at 100%*/
   removal_percentage = removal_percentage > 100 ? 100 : removal_percentage;
   /*Calculate amount of stations to be removed*/

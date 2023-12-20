@@ -1,7 +1,7 @@
 test_files := $(wildcard test/*.c)
 generator_files := $(wildcard userfile_generator/*.c)
 basefiles := $(wildcard *.c)
-files := $(basefiles) $(generator_files) new_rails/new_rail.c rejseplan_fake_api/rejseplan_fake_api.c rails/rails.c remove_stations/remove_stations.c air_travel_time/air_travel_time.c tools/tools.c userfile/fileput.c  calc_all_interaction_levels/calc_interaction.c OD_table/load_od_table.c create_line/create_new_line.c
+files := $(basefiles) $(generator_files) new_rails/new_rail.c rejseplan_fake_api/rejseplan_fake_api.c rails/rails.c remove_stations/remove_stations.c air_travel_time/air_travel_time.c tools/tools.c userfile/fileput.c  calc_all_interaction_levels/calc_interaction.c OD_table/load_od_table.c create_line/create_new_line.c offset/offset.c display/display.c
 train_optimize: $(files) 
 	gcc $(files) -lm
 debug: $(files)

@@ -1,3 +1,3 @@
+void print_travel_times(int new_line_time, int original_line_time, int plane_travel_time_min,
+                        int offset_time_min);
 
-
-void print_travel_times(int hst_travel_time_min, int city_train_total_time_min, int plane_travel_time_min, int offset_time_min);

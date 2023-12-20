@@ -1,8 +1,24 @@
 #include <stdio.h>
 
-void print_travel_times(int hst_travel_time_min, int city_train_total_time_min, int plane_travel_time_min, int offset_time_min) {
-    printf("High-Speed Train Travel Time: %d hour(s) and %d minutes\n", hst_travel_time_min / 60, hst_travel_time_min % 60);
-    printf("City Train Total Travel Time: %d hour(s) and %d minutes\n", city_train_total_time_min / 60, city_train_total_time_min % 60);
-    printf("Plane Travel Time:            %d hour(s) and %d minutes\n", plane_travel_time_min / 60, plane_travel_time_min % 60);
-    printf("Offset Time:                  %d hour(s) and %d minutes\n", offset_time_min / 60, offset_time_min % 60);
+int total_time(double *line, int size);
+
+void print_travel_times(int new_line_time, int original_line_time, int plane_travel_time_min,
+                        int offset_time_min) {
+
+  printf("High-Speed Train Travel Time: %d hour(s) and %d minutes\n", new_line_time / 60,
+         new_line_time % 60);
+  printf("City Train Total Travel Time: %d hour(s) and %d minutes\n", original_line_time / 60,
+         original_line_time % 60);
+  printf("Plane Travel Time:            %d hour(s) and %d minutes\n", plane_travel_time_min / 60,
+         plane_travel_time_min % 60);
+  printf("Offset Time:                  %d hour(s) and %d minutes\n", offset_time_min / 60,
+         offset_time_min % 60);
+}
+
+int total_time(double *line, int size) {
+  int total_traveltime = 0;
+  for (int i = 0; i < size; ++i) {
+    total_traveltime += line[i];
+  }
+  return total_traveltime;
 }

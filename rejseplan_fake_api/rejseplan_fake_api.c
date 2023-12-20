@@ -14,3 +14,7 @@ int api_get_route(char *origin, char *destination, char *route[]) {
   route[9] = "Aalborg";
   return 10;
 }
+
+int get_od_time() {
+  return 40;
+}

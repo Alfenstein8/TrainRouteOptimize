@@ -35,12 +35,12 @@ int calculate_departure_offset(Rail *new_rail, Rail *original_rail, double new_l
       for (int j = 0; j < new_station_amount; ++j) {
         if (new_rail[i].station_number == original_rail[j].station_number && (new_arrival_time > original_arrival_times[j] &&
             new_arrival_time < original_arrival_times[j] + turnover_time)){
-          printf("new_rail: %d\n org_rail: %d", new_rail[i].station_number, original_rail[j].station_number);
+          printf("new_rail: %d\n org_rail: %d\n", new_rail[i].station_number, original_rail[j].station_number);
           return k;
         }
       }
     }
   }
-  printf("No crossing lane within max offset");
+  printf("No crossing lane within max offset\n");
   return 0;
 }

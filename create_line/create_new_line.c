@@ -12,7 +12,7 @@ double *create_new_line(double HST_acceleration, Rail *new_rails, int num_statio
 
   HST_acceleration *= 3.6; // convert from meter per second squared to kilometers per minute squated
 
-  for (int i = 0; i < num_stations; ++i) {
+  for (int i = 0; i < num_stations - 1; ++i) {
     int top_speed = (new_rails[i].top_speed) / 60; // convert from km/t to km/m
     int length = new_rails[i].length;
 
