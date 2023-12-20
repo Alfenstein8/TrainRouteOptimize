@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-int is_in_string_arr(const char *string, char **arr, int arr_size);
-
 Rail *load_rails(const char *file_path, char **station_names, int station_amount) {
   Rail *rails = (Rail *)malloc(sizeof(Rail) * station_amount);
   FILE *file;
@@ -54,11 +52,4 @@ Rail *load_rails(const char *file_path, char **station_names, int station_amount
   return rails;
 }
 
-int is_in_string_arr(const char *string, char **arr, int arr_size) {
-  for (int i = 0; i < arr_size; ++i) {
-    if (!strcmp(string, arr[i])) {
-      return 1;
-    }
-  }
-  return 0;
-}
+
