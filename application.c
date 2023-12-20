@@ -44,14 +44,9 @@ void run(const char *file_path) {
 
   Rail *new_rails_hst = make_new_rails(rails, hst_route, hst_route_size);
 
-  double *hst_line = create_new_line(sim_file_data.acceleration, new_rails_hst, hst_route_size);
+  double *hst_line = create_new_line(sim_file_data.acceleration, new_rails_hst, hst_route_size, sim_file_data.hst_top_speed_kmt);
 
-  for (int i = 0; i < hst_route_size; ++i) {
-    // printf("length: %d\n",rails[i].length);
-    // printf("speed: %lf\n",hst_line[i]);
-  }
-
-  double *icl_line = create_new_line(sim_file_data.acceleration, rails, num_of_stations);
+  double *icl_line = create_new_line(sim_file_data.acceleration, rails, num_of_stations, sim_file_data.icl_top_speed);
 
   free(rails);
 

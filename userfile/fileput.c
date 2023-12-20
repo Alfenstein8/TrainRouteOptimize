@@ -31,7 +31,9 @@ int load_local_file(SimFile *sim_file, const char *filename) {
     return 1;
   if (!fscanf(fp, "High-Speed-Train (HST) Top Speed: %d [^\n]\n", &sim_file->hst_top_speed_kmt))
     return 1;
-  if (!fscanf(fp, "High-Speed-Train (HST) Acceleration: %d [^\n]\n", &sim_file->acceleration))
+  if (!fscanf(fp, "High-Speed-Train (HST) Acceleration: %lf [^\n]\n", &sim_file->acceleration))
+    return 1;
+  if (!fscanf(fp, "ICL top speed: %d [^\n]\n", &sim_file->icl_top_speed))
     return 1;
   fclose(fp);
   return 0;

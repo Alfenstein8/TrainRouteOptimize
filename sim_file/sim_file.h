@@ -13,7 +13,8 @@ typedef struct {
   int station_removal_percentage;
   int turnover_time;
   int hst_top_speed_kmt;
-  int acceleration;
+  double acceleration;
+  int icl_top_speed;
 } SimFile;
 
 #endif

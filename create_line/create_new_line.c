@@ -4,16 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double create_line_segment(int top_speed, double acceleration, double distance);
+double create_line_segment(double top_speed, double acceleration, double distance);
 
-double *create_new_line(double HST_acceleration, Rail *new_rails, int num_stations) {
+double *create_new_line(double HST_acceleration, Rail *new_rails, int num_stations, int train_top_speed) {
 
   double *new_line = (double *)malloc(num_stations * sizeof(double));
 
   HST_acceleration *= 3.6; // convert from meter per second squared to kilometers per minute squated
 
   for (int i = 0; i < num_stations - 1; ++i) {
-    int top_speed = (new_rails[i].top_speed) / 60; // convert from km/t to km/m
+    int speed = train_top_speed > new_rails[i].top_speed ? new_rails[i].top_speed : train_top_speed; 
+    double top_speed = speed / 60.0; // convert from km/t to km/m
     int length = new_rails[i].length;
 
     new_line[i] = create_line_segment(top_speed, HST_acceleration, length);
@@ -22,7 +23,7 @@ double *create_new_line(double HST_acceleration, Rail *new_rails, int num_statio
   return new_line;
 }
 
-double create_line_segment(int top_speed, double acceleration, double distance) {
+double create_line_segment(double top_speed, double acceleration, double distance) {
   double segment;
 
   double time_not_at_top_speed = top_speed / acceleration;
