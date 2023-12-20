@@ -3,7 +3,7 @@ Destination: Grenaa vej nummer 4
 Start Airport: Mums
 End Airport: Grenaa lufthavn
 Flight Time In Minutes: 70
-Airport Preperaton Time: 30
+Airport Preperation Time: 30
 Station Preperation Time: 10
 Station Percent: 1
 Station Turnover Time: 5

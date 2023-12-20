@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *calculate_all_interaction_levels(int table_size, int *OD_table) {
+int *calculate_all_interaction_levels(int table_size, int **OD_table) {
   /*Allokerer hukommelse til interationsniveauet*/
   int *interaction_levels = (int *)malloc(table_size * sizeof(int));
 
@@ -21,8 +21,8 @@ int *calculate_all_interaction_levels(int table_size, int *OD_table) {
       if (i == j) {
         continue;
       }
-      interaction_levels[i] += *((OD_table + i * table_size) + j);
-      interaction_levels[j] += *((OD_table + i * table_size) + j);
+      interaction_levels[i] += OD_table[i][j];
+      interaction_levels[j] += OD_table[i][j];
     }
   }
 

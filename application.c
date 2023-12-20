@@ -12,12 +12,12 @@
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
 #include "offset/offset.h"
+#include "OD_table/load_od_table.h"
 
 void run(const char *file_path) {
   SimFile sim_file_data;
 
   load_local_file(&sim_file_data, file_path);
-
   printf("%s\n%s\n%s\n%s\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n", sim_file_data.origin,
          sim_file_data.destination, sim_file_data.start_airport, sim_file_data.end_airport,
          sim_file_data.flight_time_min, sim_file_data.airport_prep_time_min,
@@ -29,21 +29,17 @@ void run(const char *file_path) {
 
   Rail *rails = load_rails("rails.csv", stations, num_of_stations);
 
-  /*Missing load_od_table()*/
-  int OD_table[10][10] = {
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-      {5123, 164, 1436, 34, 632, 1235, 1235, 6423, 3456, 72},
-  };
+  int **loaded_od_table = load_od_table(stations, num_of_stations, "OD_modified.csv");
 
-  int *interaction_levels = calculate_all_interaction_levels(num_of_stations, (int *)OD_table);
+  int d, p;
+    for (d = 0; d < num_of_stations; d++){
+        for (p = 0; p < num_of_stations; p++){
+            printf("%d ", loaded_od_table[d][p]);
+        }
+        printf("\n");
+    }
+
+  int *interaction_levels = calculate_all_interaction_levels(num_of_stations, loaded_od_table);
 
   int removal_percentage = 100;
 
@@ -63,4 +59,11 @@ void run(const char *file_path) {
   int air = get_total_air_travel_time(sim_file_data, travel_time_origin_destination);
 
   free(new_rails_hst);
+
+
+  int b;
+    for (b = 0; b < num_of_stations; b++){
+        free(loaded_od_table[num_of_stations]);
+    }free(loaded_od_table);
+
 }

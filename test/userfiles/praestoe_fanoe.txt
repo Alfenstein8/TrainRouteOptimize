@@ -3,7 +3,7 @@ Destination: Fanø
 Start Airport: præstø lufthavn
 End Airport: Fanø lufthavn
 Flight Time In Minutes: 120
-Airport Preperaton Time: 1
+Airport Preperation Time: 1
 Station Preperation Time: 999
 Station Percent: 235
 Station Turnover Time: -10
