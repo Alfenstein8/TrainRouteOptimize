@@ -5,39 +5,42 @@
 #define MAX_OFFSET_ALLOWED_MINUTES 60
 
 int calculate_departure_offset(Rail *new_rail, Rail *original_rail, double new_line[],
-                               double icl_line[], int HST_station_amount, int ICL_station_amount,
+                               double original_line[], int new_station_amount, int original_station_amount,
                                int turnover_time) {
-  double ICL_arrival_times[ICL_station_amount];
-  int ICL_start_time = 0;
-  ICL_arrival_times[0] = ICL_start_time;
 
-  for (int i = 1; i < ICL_station_amount; ++i) {
-    double time_taken = icl_line[i - 1];
+  double original_arrival_times[original_station_amount];
+  int original_start_time = 0;
+  original_arrival_times[0] = original_start_time;
 
-    ICL_arrival_times[i] = ICL_arrival_times[i - 1] + time_taken;
+  for (int i = 1; i < original_station_amount; ++i) {
+    double time_taken = original_line[i - 1];
+
+    original_arrival_times[i] = original_arrival_times[i - 1] + time_taken;
   }
-  double HST_arrival_times[HST_station_amount];
-  for (int k = 1; k < MAX_OFFSET_ALLOWED_MINUTES; k++) {
-    int HST_start_time = k;
-    HST_arrival_times[0] = HST_start_time;
+  double new_arrival_times[new_station_amount];
+  for (int k = turnover_time + 1; k < MAX_OFFSET_ALLOWED_MINUTES; k++) {
+    int new_start_time = k;
+    new_arrival_times[0] = new_start_time;
 
-    for (int i = 1; i < HST_station_amount; ++i) {
+    for (int i = 1; i < new_station_amount; ++i) {
       // Calculate time taken to reach the current segment
       double time_taken = new_line[i - 1];
 
-      HST_arrival_times[i] = HST_arrival_times[i - 1] + time_taken;
+      new_arrival_times[i] = new_arrival_times[i - 1] + time_taken;
     }
 
-    for (int i = 1; i < HST_station_amount; ++i) {
-      int HST_arrival_time = HST_arrival_times[i];
+    for (int i = 0; i < new_station_amount; ++i) {
+      int new_arrival_time = new_arrival_times[i];
 
-      for (int j = 1; j < ICL_station_amount; ++j) {
-        if (HST_arrival_time > ICL_arrival_times[j] ||
-            HST_arrival_time < ICL_arrival_times[j] + turnover_time &&
-                new_rail[i].station_number == original_rail[j].station_number) {
+      for (int j = 0; j < new_station_amount; ++j) {
+        if (new_rail[i].station_number == original_rail[j].station_number && (new_arrival_time > original_arrival_times[j] &&
+            new_arrival_time < original_arrival_times[j] + turnover_time)){
+          printf("new_rail: %d\n org_rail: %d", new_rail[i].station_number, original_rail[j].station_number);
           return k;
         }
       }
     }
   }
+  printf("No crossing lane within max offset");
+  return 0;
 }
