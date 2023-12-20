@@ -5,12 +5,15 @@
 #include "OD_table/load_od_table.h"
 #include "air_travel_time/air_travel_time.h"
 #include "calc_all_interaction_levels/calc_interaction.h"
+#include "create_line/create_new_line.h"
 #include "new_rails/new_rail.h"
 #include "rails/rails.h"
 #include "rejseplan_fake_api/rejseplan_fake_api.h"
 #include "remove_stations/remove_stations.h"
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
+#include "offset/offset.h"
+#include "OD_table/load_od_table.h"
 
 void run(const char *file_path) {
   SimFile sim_file_data;
@@ -46,6 +49,10 @@ void run(const char *file_path) {
                                                        removal_percentage, hst_route);
 
   Rail *new_rails_hst = make_new_rails(rails, hst_route, hst_route_size);
+
+  double *hst_line = create_new_line(sim_file_data.acceleration, new_rails_hst, hst_route_size);
+  double *icl_line = create_new_line(sim_file_data.acceleration, rails, num_of_stations);
+
   free(rails);
 
   int travel_time_origin_destination = 40;

@@ -39,6 +39,7 @@ Rail *load_rails(const char *file_path, char **station_names, int station_amount
           if (!strcmp(origin, station_names[i]) &&
               !strcmp(destinations[column], station_names[i + 1])) {
             sscanf(token, " %d/%d ", &rails[i].length, &rails[i].top_speed);
+            rails->station_number = i;
           }
         }
       }
