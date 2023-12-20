@@ -10,3 +10,12 @@ char *strsep(char **stringp, const char *delim) {
             *stringp = 0; }
     return rv;
 }
+
+int is_in_string_arr(const char *string, char **arr, int arr_size) {
+  for (int i = 0; i < arr_size; ++i) {
+    if (!strcmp(string, arr[i])) {
+      return 1;
+    }
+  }
+  return 0;
+}
