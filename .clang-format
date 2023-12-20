@@ -7,3 +7,4 @@ BreakStringLiterals: false
 ColumnLimit: 100
 AllowShortCaseLabelsOnASingleLine: false
 IncludeBlocks: Preserve
+IndentWidth: 2

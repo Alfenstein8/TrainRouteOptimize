@@ -3,16 +3,11 @@
 
 int *calculate_all_interaction_levels(int table_size, int **OD_table) {
   /*Allocate memory for the the interaction levels*/
-  int *interaction_levels = (int *)malloc(table_size * sizeof(int));
+  int *interaction_levels = (int *)calloc(table_size, sizeof(int));
 
   if (interaction_levels == NULL) {
     printf("Could not allocate memory!");
     exit(EXIT_FAILURE);
-  }
-
-  /*Inisialize the array with zero for each station*/
-  for (int i = 0; i < table_size; ++i) {
-    interaction_levels[i] = 0;
   }
 
   /*Calculate interaction levels*/
