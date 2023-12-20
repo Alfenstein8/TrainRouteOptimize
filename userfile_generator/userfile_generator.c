@@ -47,7 +47,7 @@ void run_file_gen(void) {
       break;
     case STRING:
       printf("%s: ", fields[i].name);
-      scanf(" %[^\n]",string_value);
+      scanf(" %[^\n]", string_value);
       fprintf(fp, "%s: %s\n", fields[i].name, string_value);
       break;
     }
