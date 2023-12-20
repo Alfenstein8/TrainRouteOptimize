@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "OD_table/load_od_table.h"
 #include "air_travel_time/air_travel_time.h"
 #include "calc_all_interaction_levels/calc_interaction.h"
+#include "new_rails/new_rail.h"
 #include "rails/rails.h"
+#include "rejseplan_fake_api/rejseplan_fake_api.h"
 #include "remove_stations/remove_stations.h"
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
-#include "new_rails/new_rail.h"
-#include "rejseplan_fake_api/rejseplan_fake_api.h"
-#include "OD_table/load_od_table.h"
 
 void run(const char *file_path) {
   SimFile sim_file_data;
@@ -22,21 +22,20 @@ void run(const char *file_path) {
          sim_file_data.station_prep_time_min, sim_file_data.station_removal_percentage,
          sim_file_data.turnover_time, sim_file_data.hst_top_speed_kmt, sim_file_data.acceleration);
 
-
   char *stations[10];
-  int num_of_stations = api_get_route("København", "Aalborg",stations); 
-                                      
+  const int num_of_stations = api_get_route("København", "Aalborg", stations);
+
   Rail *rails = load_rails("rails.csv", stations, num_of_stations);
 
   int **loaded_od_table = load_od_table(stations, num_of_stations, "OD_modified.csv");
 
   int d, p;
-    for (d = 0; d < num_of_stations; d++){
-        for (p = 0; p < num_of_stations; p++){
-            printf("%d ", loaded_od_table[d][p]);
-        }
-        printf("\n");
+  for (d = 0; d < num_of_stations; d++) {
+    for (p = 0; p < num_of_stations; p++) {
+      printf("%d ", loaded_od_table[d][p]);
     }
+    printf("\n");
+  }
 
   int *interaction_levels = calculate_all_interaction_levels(num_of_stations, loaded_od_table);
 
@@ -55,10 +54,9 @@ void run(const char *file_path) {
 
   free(new_rails_hst);
 
-
   int b;
-    for (b = 0; b < num_of_stations; b++){
-        free(loaded_od_table[num_of_stations]);
-    }free(loaded_od_table);
-
+  for (b = 0; b < num_of_stations; b++) {
+    free(loaded_od_table[b]);
+  }
+  free(loaded_od_table);
 }
