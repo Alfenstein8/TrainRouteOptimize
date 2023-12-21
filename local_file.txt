@@ -7,6 +7,6 @@ Airport Preperation Time: 65
 Station Preperation Time: 10
 Station Percent: 50
 Station Turnover Time: 3
-High-Speed-Train (HST) Top Speed: 180
+High-Speed-Train (HST) Top Speed: 250
 High-Speed-Train (HST) Acceleration: 1
 ICL top speed: 126
