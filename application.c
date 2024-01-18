@@ -23,7 +23,10 @@ void free_2darray(void **array, int size);
 void run(const char *file_path) {
   SimFile sim_file;
 
-  load_local_file(&sim_file, file_path);
+  if(load_local_file(&sim_file, file_path)){
+    printf("Something went wrong with loading the simulationfile");
+    exit(EXIT_FAILURE);
+  }
 
   char *stations[MAX_NUMBER_OF_STATIONS];
   const int icl_line_length = api_get_route("København", "Aalborg", stations);
