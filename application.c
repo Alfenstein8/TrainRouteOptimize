@@ -15,8 +15,6 @@
 #include "sim_file/sim_file.h"
 #include "userfile/fileput.h"
 
-#define MAX_NUMBER_OF_STATIONS 10
-
 int get_total_time(double *line, int size, int turnover_time);
 void free_2darray(void **array, int size);
 
@@ -28,20 +26,21 @@ void run(const char *file_path) {
     exit(EXIT_FAILURE);
   }
 
-  char *stations[MAX_NUMBER_OF_STATIONS];
-  const int icl_line_length = api_get_route("København", "Aalborg", stations);
+  int icl_line_length;
+  char **stations = api_get_route("København", "Aalborg", &icl_line_length);
 
   Rail *all_rails = load_rails("rails.csv", stations, icl_line_length);
 
   int **od_table = load_od_table(stations, icl_line_length, "OD_modified.csv");
   int *interaction_levels = calculate_all_interaction_levels(icl_line_length, od_table);
-  free_2darray((void *)od_table, icl_line_length);
+  free_2darray((void **)od_table, icl_line_length);
 
   int hst_station_numbers[icl_line_length];
   int hst_line_length =
       remove_low_interaction_stations(interaction_levels, icl_line_length,
                                       sim_file.station_removal_percentage, hst_station_numbers);
 
+  free_2darray((void **)stations, icl_line_length-1);
   Rail *hst_rails = make_new_rails(all_rails, hst_station_numbers, hst_line_length);
 
   double *hst_times = create_new_line(sim_file.acceleration, hst_rails, hst_line_length,
