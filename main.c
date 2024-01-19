@@ -16,10 +16,21 @@ int main(const int argc, char **argv) {
       run_file_gen();
     }
   }
-  if (!found_gen) {
-    for (int i = 1; i < argc; ++i) {
-      run(argv[i]);
+  if (found_gen) {
+    return 0;
+  }
+  int sim_files_to = argc;
+  char *rails_file = "rails.csv";
+  for (int i = 1; i < argc - 1; ++i) {
+    if (!strcmp(argv[i], "-r")) {
+      sim_files_to = i;
+      rails_file = argv[i + 1];
+      break;
     }
+  }
+
+  for (int i = 1; i < sim_files_to; ++i) {
+    run(argv[i], rails_file);
   }
   return 0;
 }

@@ -18,7 +18,7 @@
 int get_total_time(double *line, int size, int turnover_time);
 void free_2darray(void **array, int size);
 
-void run(const char *file_path) {
+void run(const char *file_path, const char *rails_path) {
   SimFile sim_file;
 
   if(load_local_file(&sim_file, file_path)){
@@ -29,7 +29,7 @@ void run(const char *file_path) {
   int icl_line_length;
   char **stations = api_get_route("København", "Aalborg", &icl_line_length);
 
-  Rail *all_rails = load_rails("rails.csv", stations, icl_line_length);
+  Rail *all_rails = load_rails(rails_path, stations, icl_line_length);
 
   int **od_table = load_od_table(stations, icl_line_length, "OD_modified.csv");
   int *interaction_levels = calculate_all_interaction_levels(icl_line_length, od_table);
