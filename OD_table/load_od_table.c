@@ -30,7 +30,7 @@ int **load_od_table(char **stations, int stations_length, char filename[]) {
 
   while (fgets(read_line, sizeof(read_line), f)) {
     char *station;
-    char *line = strdup(read_line);
+    char *line = read_line;
 
     col_index = 0;
     while ((station = strsep(&line, ";"))) {

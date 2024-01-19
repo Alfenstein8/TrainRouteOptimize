@@ -24,7 +24,7 @@ Rail *load_rails(const char *file_path, char **station_names, int station_amount
 
   while (fgets(read_line, sizeof(read_line), file)) {
     char *token;                    // current cell value
-    char *line = strdup(read_line); // Create a pointer to a duplicate of the string
+    char *line = read_line; // Create a pointer to a duplicate of the string
 
     column = 0;
     while ((token = strsep(&line, ","))) { // Go to next cell
