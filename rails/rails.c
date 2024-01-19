@@ -8,8 +8,7 @@
 #define MAX_NAME_LENGTH 50
 #define MAX_AMOUNT_OF_STATIONS 100
 
-Rail *load_rails(const char *file_path, char **station_names, int station_amount) {
-  Rail *rails = (Rail *)malloc(sizeof(Rail) * station_amount);
+void load_rails(const char *file_path, char **station_names, int station_amount, Rail *rails) {
   FILE *file;
   file = fopen(file_path, "r");
   if (file == NULL) {
@@ -53,6 +52,5 @@ Rail *load_rails(const char *file_path, char **station_names, int station_amount
   fclose(file);
   rails[station_amount - 1].length = 0;
   rails[station_amount - 1].top_speed = 0;
-  return rails;
 }
 

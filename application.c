@@ -29,7 +29,8 @@ void run(const char *file_path, const char *rails_path) {
   int icl_line_length;
   char **stations = api_get_route("København", "Aalborg", &icl_line_length);
 
-  Rail *all_rails = load_rails(rails_path, stations, icl_line_length);
+  Rail all_rails[icl_line_length];
+  load_rails(rails_path, stations, icl_line_length, all_rails);
 
   int **od_table = load_od_table(stations, icl_line_length, "OD_modified.csv");
   int *interaction_levels = calculate_all_interaction_levels(icl_line_length, od_table);
@@ -47,8 +48,6 @@ void run(const char *file_path, const char *rails_path) {
                                       sim_file.hst_top_speed_kmt);
   double *icl_times =
       create_new_line(sim_file.acceleration, all_rails, icl_line_length, sim_file.icl_top_speed);
-
-  free(all_rails);
 
   int misc_travel_time = get_od_time(); // miscellaneous travel time
   int air_travel_time = get_total_air_travel_time(sim_file, misc_travel_time);

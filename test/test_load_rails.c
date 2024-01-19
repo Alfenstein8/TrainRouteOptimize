@@ -6,7 +6,9 @@ void test_load_rails(CuTest *tc) {
   char *stations[10] = {"København H", "Odense St.",      "Fredericia St.", "Vejle St.",
                         "Horsens St.", "Skanderborg St.", "Aahus St.",      "Randers St.",
                         "Hobro St.",   "Aalborg St."};
-  Rail *rails = load_rails("test/rails/rails.csv", stations, 10);
+  int length = 10;
+  Rail rails[length];
+  load_rails("test/rails/rails.csv", stations, 10, rails);
   CuAssertIntEquals(tc, 156, rails[0].length);
   CuAssertIntEquals(tc, 58, rails[1].length);
   CuAssertIntEquals(tc, 25, rails[2].length);
