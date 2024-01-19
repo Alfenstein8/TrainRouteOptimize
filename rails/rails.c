@@ -8,11 +8,12 @@
 #define MAX_NAME_LENGTH 50
 #define MAX_AMOUNT_OF_STATIONS 100
 
-void load_rails(const char *file_path, char **station_names, int station_amount, Rail *rails) {
+int load_rails(const char *file_path, char **station_names, int station_amount, Rail *rails) {
   FILE *file;
   file = fopen(file_path, "r");
   if (file == NULL) {
-    printf("Invalid file path");
+    printf("Invalid file path\n");
+    return 1;
   }
 
   char read_line[MAX_LINE_LENGTH];
@@ -52,5 +53,6 @@ void load_rails(const char *file_path, char **station_names, int station_amount,
   fclose(file);
   rails[station_amount - 1].length = 0;
   rails[station_amount - 1].top_speed = 0;
+  return 0;
 }
 

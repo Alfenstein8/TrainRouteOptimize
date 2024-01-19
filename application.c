@@ -22,7 +22,7 @@ void run(const char *file_path, const char *rails_path) {
   SimFile sim_file;
 
   if(load_local_file(&sim_file, file_path)){
-    printf("Something went wrong with loading the simulationfile");
+    printf("The simulation file '%s' does not exist or is not formatted correctly\n",file_path);
     exit(EXIT_FAILURE);
   }
 
@@ -30,7 +30,10 @@ void run(const char *file_path, const char *rails_path) {
   char **stations = api_get_route("København", "Aalborg", &icl_line_length);
 
   Rail all_rails[icl_line_length];
-  load_rails(rails_path, stations, icl_line_length, all_rails);
+  if(load_rails(rails_path, stations, icl_line_length, all_rails)){
+    printf("The rails file '%s' does not exist\n",rails_path);
+    exit(EXIT_FAILURE);
+  }
 
   int **od_table = load_od_table(stations, icl_line_length, "OD_modified.csv");
   int *interaction_levels = calculate_all_interaction_levels(icl_line_length, od_table);
