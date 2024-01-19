@@ -34,7 +34,7 @@ int compare_station_numbers(const void *a, const void *b) {
 
 int remove_low_interaction_stations(int *route, int num_stations, int removal_percentage,
                                     int *new_route) {
-  if (num_stations <= 1) {
+  if (num_stations <= 2) {
     printf("Not enough stations to remove.\n");
     return 0;
   }
@@ -66,6 +66,6 @@ int remove_low_interaction_stations(int *route, int num_stations, int removal_pe
     new_route[i - num_to_remove] = sort_route[i].station_nr;
   }
 
-  return num_stations - num_to_remove;
+  return new_route_size;
 }
 
