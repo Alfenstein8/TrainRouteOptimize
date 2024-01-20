@@ -43,6 +43,5 @@ int calculate_departure_offset(Rail *new_rail, Rail *original_rail, double new_l
     }
   }
 
-  printf("No crossing lane within max offset\n");
   return 0;
 }

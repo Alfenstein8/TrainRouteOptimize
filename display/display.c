@@ -13,8 +13,12 @@ void print_travel_times(const char *simfile_name, int new_line_time, int origina
          original_line_time % 60);
   printf("Plane Travel Time:            %d hour(s) and %d minutes\n", plane_travel_time_min / 60,
          plane_travel_time_min % 60);
-  printf("Offset Time:                  %d hour(s) and %d minutes\n", offset_time_min / 60,
-         offset_time_min % 60);
+  if (offset_time_min == 0) {
+    printf("No crossing lane within max offset\n");
+  } else {
+    printf("Offset Time:                  %d hour(s) and %d minutes\n", offset_time_min / 60,
+           offset_time_min % 60);
+  }
 }
 
 int total_time(double *line, int size) {
