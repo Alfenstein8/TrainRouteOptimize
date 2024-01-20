@@ -2,8 +2,10 @@
 
 int total_time(double *line, int size);
 
-void print_travel_times(int new_line_time, int original_line_time, int plane_travel_time_min,
-                        int offset_time_min) {
+void print_travel_times(const char *simfile_name, int new_line_time, int original_line_time,
+                        int plane_travel_time_min, int offset_time_min) {
+  printf("-------------------\n");
+  printf("Simulation file: %s\n", simfile_name);
 
   printf("High-Speed Train Travel Time: %d hour(s) and %d minutes\n", new_line_time / 60,
          new_line_time % 60);

@@ -61,7 +61,7 @@ void run(const char *file_path, const char *rails_path) {
 
   int new_line_time = get_total_time(hst_times, hst_line_length, sim_file.turnover_time);
   int original_line_time = get_total_time(icl_times, icl_line_length, sim_file.turnover_time);
-  print_travel_times(new_line_time, original_line_time, air_travel_time, offset_time);
+  print_travel_times(file_path,new_line_time, original_line_time, air_travel_time, offset_time);
 
   free(hst_rails);
 }
