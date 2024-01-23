@@ -1,1 +1,1 @@
-void run(const char* filename);
+void run(const char* filename, const char *rails_path);

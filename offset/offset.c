@@ -5,8 +5,8 @@
 #define MAX_OFFSET_ALLOWED_MINUTES 60
 
 int calculate_departure_offset(Rail *new_rail, Rail *original_rail, double new_line[],
-                               double original_line[], int new_station_amount, int original_station_amount,
-                               int turnover_time) {
+                               double original_line[], int new_station_amount,
+                               int original_station_amount, int turnover_time) {
 
   double original_arrival_times[original_station_amount];
   int original_start_time = 0;
@@ -17,6 +17,7 @@ int calculate_departure_offset(Rail *new_rail, Rail *original_rail, double new_l
 
     original_arrival_times[i] = original_arrival_times[i - 1] + time_taken;
   }
+
   double new_arrival_times[new_station_amount];
   for (int k = turnover_time + 1; k < MAX_OFFSET_ALLOWED_MINUTES; k++) {
     int new_start_time = k;
@@ -33,14 +34,14 @@ int calculate_departure_offset(Rail *new_rail, Rail *original_rail, double new_l
       int new_arrival_time = new_arrival_times[i];
 
       for (int j = 0; j < new_station_amount; ++j) {
-        if (new_rail[i].station_number == original_rail[j].station_number && (new_arrival_time > original_arrival_times[j] &&
-            new_arrival_time < original_arrival_times[j] + turnover_time)){
-          printf("new_rail: %d\n org_rail: %d\n", new_rail[i].station_number, original_rail[j].station_number);
+        if (new_rail[i].station_number == original_rail[j].station_number &&
+            (new_arrival_time > original_arrival_times[j] &&
+             new_arrival_time < original_arrival_times[j] + turnover_time)) {
           return k;
         }
       }
     }
   }
-  printf("No crossing lane within max offset\n");
+
   return 0;
 }

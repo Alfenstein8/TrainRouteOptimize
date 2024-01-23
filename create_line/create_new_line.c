@@ -4,20 +4,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define M_TO_M_SQRT 3.6
+
 double create_line_segment(double top_speed, double acceleration, double distance);
 
-double *create_new_line(double HST_acceleration, Rail *new_rails, int num_stations, int train_top_speed) {
+double *create_new_line(double acceleration, Rail *rails, int num_stations, int train_top_speed) {
 
   double *new_line = (double *)malloc(num_stations * sizeof(double));
 
-  HST_acceleration *= 3.6; // convert from meter per second squared to kilometers per minute squated
+  acceleration *= M_TO_M_SQRT; // convert from meter per second squared to kilometers per minute squated
 
   for (int i = 0; i < num_stations - 1; ++i) {
-    int speed = train_top_speed > new_rails[i].top_speed ? new_rails[i].top_speed : train_top_speed; 
+    int speed = train_top_speed > rails[i].top_speed ? rails[i].top_speed : train_top_speed; 
     double top_speed = speed / 60.0; // convert from km/t to km/m
-    int length = new_rails[i].length;
+    int length = rails[i].length;
 
-    new_line[i] = create_line_segment(top_speed, HST_acceleration, length);
+    new_line[i] = create_line_segment(top_speed, acceleration, length);
   }
 
   return new_line;

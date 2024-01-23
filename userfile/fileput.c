@@ -8,7 +8,7 @@
 int load_local_file(SimFile *sim_file, const char *filename) {
   FILE *fp = fopen(filename, "r");
   if (fp == NULL) {
-    printf("Failed to open file");
+    printf("Failed to open file\n");
     return 1;
   }
   if (!fscanf(fp, "Origin: %49[^\n]\n", sim_file->origin))

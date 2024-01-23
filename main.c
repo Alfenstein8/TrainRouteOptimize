@@ -9,16 +9,25 @@ int main(const int argc, char **argv) {
     printf("No file entered\n");
     return 0;
   }
-  int found_gen = 0;
   for (int i = 1; i < argc; ++i) {
     if (!strcmp(argv[i], "--gen")) {
-      found_gen = 1;
       run_file_gen();
+      return 0;
     }
   }
-  if (!found_gen) {
-    for (int i = 1; i < argc; ++i) {
-      run(argv[i]);
+  int dash_r_index = argc;
+  char *rails_file = "rails.csv";
+  for (int i = 1; i < argc - 1; ++i) {
+    if (!strcmp(argv[i], "-r")) {
+      dash_r_index = i;
+      rails_file = argv[i + 1];
+      break;
+    }
+  }
+
+  for (int i = 1; i < argc; ++i) {
+    if(i != dash_r_index && i != dash_r_index + 1){
+     run(argv[i], rails_file);
     }
   }
   return 0;

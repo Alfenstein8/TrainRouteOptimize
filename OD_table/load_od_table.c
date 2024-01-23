@@ -9,12 +9,12 @@
 #define MAX_TO_STATIONS 290
 #define MAX_STATION_NAME_LENGTH 50
 
-int **load_od_table(char **route, int route_length, char filename[]) {
+int **load_od_table(char **stations, int stations_length, char filename[]) {
   int **loaded_od_table;
-  loaded_od_table = (int **)malloc(route_length * sizeof(int *));
+  loaded_od_table = (int **)malloc(stations_length * sizeof(int *));
   int i;
-  for (i = 0; i < route_length; i++) {
-    loaded_od_table[i] = (int *)malloc(route_length * sizeof(int));
+  for (i = 0; i < stations_length; i++) {
+    loaded_od_table[i] = (int *)malloc(stations_length * sizeof(int));
   }
 
   FILE *f = fopen(filename, "r");
@@ -30,7 +30,7 @@ int **load_od_table(char **route, int route_length, char filename[]) {
 
   while (fgets(read_line, sizeof(read_line), f)) {
     char *station;
-    char *line = strdup(read_line);
+    char *line = read_line;
 
     col_index = 0;
     while ((station = strsep(&line, ";"))) {
@@ -39,16 +39,16 @@ int **load_od_table(char **route, int route_length, char filename[]) {
         station[index] = '\0';
         strcpy(to_stations[col_index], station);
       } else if (col_index == 0) {
-        if (!is_in_string_arr(station, route, route_length)) {
+        if (!is_in_string_arr(station, stations, stations_length)) {
           break;
         }
         strcpy(from_station, station);
       } else {
 
-        for (int n = 0; n < route_length; n++) {
-          for (int j = 0; j < route_length; j++) {
-            if (strcmp(from_station, route[n]) == 0 &&
-                strcmp(to_stations[col_index], route[j]) == 0) {
+        for (int n = 0; n < stations_length; n++) {
+          for (int j = 0; j < stations_length; j++) {
+            if (strcmp(from_station, stations[n]) == 0 &&
+                strcmp(to_stations[col_index], stations[j]) == 0) {
               int s_int = atoi(station);
               loaded_od_table[n][j] = s_int;
             }

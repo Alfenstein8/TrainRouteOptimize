@@ -4,24 +4,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define MAX_LINE_LENGTH 500
+#define MAX_NAME_LENGTH 50
+#define MAX_AMOUNT_OF_STATIONS 100
 
-Rail *load_rails(const char *file_path, char **station_names, int station_amount) {
-  Rail *rails = (Rail *)malloc(sizeof(Rail) * station_amount);
+int load_rails(const char *file_path, char **station_names, int station_amount, Rail *rails) {
   FILE *file;
   file = fopen(file_path, "r");
   if (file == NULL) {
-    printf("Invalid file path");
+    printf("Invalid file path\n");
+    return 1;
   }
 
-  char read_line[500];
-  char destinations[100][50];
-  char origin[50];
+  char read_line[MAX_LINE_LENGTH];
+  char destinations[MAX_AMOUNT_OF_STATIONS][MAX_NAME_LENGTH];
+  char origin[MAX_NAME_LENGTH];
 
   int row = 0, column = 0;
 
   while (fgets(read_line, sizeof(read_line), file)) {
     char *token;                    // current cell value
-    char *line = strdup(read_line); // Create a pointer to a duplicate of the string
+    char *line = read_line; // Create a pointer to a duplicate of the string
 
     column = 0;
     while ((token = strsep(&line, ","))) { // Go to next cell
@@ -48,9 +51,8 @@ Rail *load_rails(const char *file_path, char **station_names, int station_amount
     ++row;
   }
   fclose(file);
-  rails[station_amount-1].length = 0;
-  rails[station_amount-1].top_speed = 0;
-  return rails;
+  rails[station_amount - 1].length = 0;
+  rails[station_amount - 1].top_speed = 0;
+  return 0;
 }
-
 
